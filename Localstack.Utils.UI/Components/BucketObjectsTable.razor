@@ -1,0 +1,14 @@
+@using Localstack.Utils.Domain.S3.Models
+@inherits Localstack.Utils.UI.Components.ComponentBases.BucketObjectsTableBase
+
+<h3>@BucketName Objects</h3>
+
+<RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" AllowAlternatingRows="false" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" Data="@BucketObjects" TItem="BucketObject" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" @bind-value=@SelectedObjects>
+    <Columns>
+        <RadzenDataGridColumn TItem="BucketObject" Property="Key" Filterable="true" Title="Key" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="BucketObject" Property="Size" Title="Size" Sortable="true" Frozen="true" Filterable="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="BucketObject" Property="LastModified" Title="Last Modified" Sortable="true" Frozen="true" Filterable="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="BucketObject" Property="ETag" Title="ETag" Sortable="true" Frozen="true" Filterable="true" Width="80px" TextAlign="TextAlign.Center" />
+    </Columns>
+</RadzenDataGrid>
+

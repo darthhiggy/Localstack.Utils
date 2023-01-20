@@ -1,0 +1,22 @@
+@page "/S3Utils"
+@using Localstack.Utils.Domain.S3.Models
+@using Localstack.Utils.UI.Components
+@inherits Localstack.Utils.UI.Pages.ComponentBases.S3UtilsBase;
+
+<h1 class="page-title">S3 Bucket Utilities</h1>
+
+<RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" AllowAlternatingRows="false" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" Data="@Buckets" TItem="Bucket" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Multiple" @bind-value=@SelectedBuckets>
+    <Columns>
+        <RadzenDataGridColumn TItem="Bucket" Property="BucketName" Filterable="true" Title="Bucket" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="Bucket" Property="CreationDate" Title="Created On" Sortable="true" Frozen="true" Filterable="true" Width="80px" TextAlign="TextAlign.Center" />
+    </Columns>
+</RadzenDataGrid>
+
+@if ((SelectedBuckets?.Count ?? 0) > 0)
+{
+    @foreach (var bucket in SelectedBuckets)
+    {
+        @* <p>@bucket.BucketName</p> *@
+        <BucketObjectsTable BucketName=@bucket.BucketName />
+    }
+}
